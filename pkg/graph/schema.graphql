@@ -1,0 +1,32 @@
+type Query {
+  getMostRecentReviews(limit: Int): [Review!]!
+  getReviewsByUsername(username: String!): [Review!]!
+  countReviewsByUsername(username: String!): Int!
+}
+
+type Mutation {
+  createReview(reviewInput: CreateReviewInput!): Review
+}
+
+type Subscription {
+  feed: NewReviewEvent!
+}
+
+input CreateReviewInput {
+  username: String!
+  avatarURL: String!
+  content: String!
+}
+
+type Review {
+  id: ID!
+  username: String!
+  avatarURL: String!
+  content: String!
+  createdAt: Int!
+}
+
+type NewReviewEvent {
+  total: Int!
+  newReview: Review!
+}
